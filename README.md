@@ -37,3 +37,25 @@ Trello benzeri, sürükle-bırak destekli kanban tahtası uygulaması. Kullanıc
 Her kart ve sütunun `position` adında integer bir alanı var. Kart taşındığında sadece o kolondaki kartların position değerleri güncelleniyor. Bu sayfa yenilemesinde sıralama korunuyor.
 
 ### Veri modeli
+profiles
+└── boards (user_id → profiles.id)
+└── columns (board_id → boards.id)
+└── cards (column_id → columns.id)
+### Güvenlik
+Row Level Security (RLS) ile her kullanıcı yalnızca kendi verilerine erişebilir. Supabase policy'leri board → column → card zinciri boyunca uygulanıyor.
+
+## Kurulum
+
+```bash
+git clone https://github.com/tilsimrami/taskflow.git
+cd taskflow
+npm install
+```
+
+`.env.local` dosyası oluştur:
+NEXT_PUBLIC_SUPABASE_URL=your_supabase_url
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
+
+```bash
+npm run dev
+```
